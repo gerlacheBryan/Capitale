@@ -41,16 +41,16 @@
                                     'drapeaux' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Flag_of_Algeria.svg/1280px-Flag_of_Algeria.svg.png'
                                 ],
                 'corée du nord' => [
-                                    'capitale'=> 'yongyang',
+                                    'capitale'=> 'Pyongyang',
                                     'drapeaux' =>'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Flag_of_North_Korea.svg/langfr-225px-Flag_of_North_Korea.svg.png'
                                 ]
     ];
-    $answer="";
+    $selectedCountry="";
     $messageError="";
     if(isset($_GET['pays'])){
-        $answer = $_GET['pays'];
+        $selectedCountry = $_GET['pays'];
     }
-    if (!in_array($answer,array_keys($pays))){
+    if (!in_array($selectedCountry,array_keys($pays))){
         $messageError = "Pays non existant";
     }
 
@@ -63,21 +63,21 @@
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
+        <style>
+            html{
+                text-align: center;
+            }
+            body{
+                background-color: aquamarine;
+            }
+        </style>
     </head>
-    <style>
-        html{
-            text-align: center;
-        }
-        body{
-            background-color: aquamarine;
-        }
-    </style>
     <body>
     <div>
         <form action="index.php" method="get">
             <select name="pays" id="pays">
                 <?php foreach ($pays as $key => $item): ?>
-                <option value="<?= $key ?>"<?php if($key === $answer){echo "selected";}?> ><?= mb_strtoupper($key )?></option>
+                <option value="<?= $key ?>"<?php if($key === $selectedCountry){echo "selected";}?> ><?= mb_strtoupper($key )?></option>
                 <?php endforeach; ?>
             </select>
             <input type="submit">
@@ -88,9 +88,9 @@
         ça serait cool !</p>
         <?php else: ?>
         <p>
-            La capital de <?= $answer; ?> est <?= $pays[$answer]['capitale'] ?>
+            La capital de <?= ucwords($selectedCountry); ?> est <?= ucfirst($pays[$selectedCountry]['capitale']) ?>
         </p>
-        <img src= "<?= $pays[$answer]['drapeaux'] ?>" width="500px">
+        <img src= "<?= $pays[$selectedCountry]['drapeaux'] ?>" width="500px">
         <?php endif; ?>
     </div>
     </body>
