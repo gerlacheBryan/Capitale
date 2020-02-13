@@ -1,11 +1,4 @@
 <?php
-   /**** $fruits = ['favorite' => 'pomme',
-        'second'=>'poire',
-        'almost-a-fruit'=>'scoubidou'];
-    echo $fruits['second'];
-    foreach($fruits as $fruit){
-        echo $fruit;
-} ***/
 
     $pays = [   'belgique' =>   [
                                     'capitale' => 'bruxelles',
@@ -71,24 +64,33 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
     </head>
+    <style>
+        html{
+            text-align: center;
+        }
+        body{
+            background-color: aquamarine;
+        }
+    </style>
     <body>
     <div>
         <form action="index.php" method="get">
             <select name="pays" id="pays">
                 <?php foreach ($pays as $key => $item): ?>
-                <option value="<?= $key ?>" ><?= mb_strtoupper($key )?></option>
+                <option value="<?= $key ?>"<?php if($key === $answer){echo "selected";}?> ><?= mb_strtoupper($key )?></option>
                 <?php endforeach; ?>
             </select>
             <input type="submit">
         </form>
 
         <?php if ($messageError): ?>
-        <p> Pays pas dans la liste </p>
+        <p> Oulala, le pays que vous venez de mettre n'existe pas, veuillez mettre autre chose, un pays dans la liste,
+        ça serait cool !</p>
         <?php else: ?>
         <p>
             La capital de <?= $answer; ?> est <?= $pays[$answer]['capitale'] ?>
         </p>
-        <img src= "<?= $pays[$answer]['drapeaux'] ?>" width="500px" height=auto>
+        <img src= "<?= $pays[$answer]['drapeaux'] ?>" width="500px">
         <?php endif; ?>
     </div>
     </body>
